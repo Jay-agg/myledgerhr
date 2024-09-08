@@ -118,14 +118,14 @@ const MyLedger: React.FC<MyLedgerProps> = ({
   };
 
   return (
-    <div className="p-4 bg-gray-100 min-h-screen">
-      <h1 className="text-3xl font-bold mb-6 text-center text-blue-600">
+    <div className="p-4 bg-slate-900 min-h-screen">
+      <h1 className="text-3xl font-bold mb-6 text-center text-blue-400">
         MyLedger - Verification Requests
       </h1>
 
       {alert && (
         <Alert
-          className="mb-6 max-w-md mx-auto"
+          className="mb-6 max-w-md mx-auto text-white "
           variant={alert.type === "success" ? "default" : "destructive"}
         >
           {alert.type === "success" ? (
@@ -144,29 +144,33 @@ const MyLedger: React.FC<MyLedgerProps> = ({
         {verificationRequests.map((request) => (
           <Card
             key={request.id}
-            className="cursor-pointer hover:shadow-lg transition-shadow bg-white"
+            className="cursor-pointer hover:shadow-lg transition-shadow bg-slate-800 border-slate-700 text-slate-200"
           >
-            <CardHeader className="bg-blue-50">
-              <CardTitle className="flex items-center">
+            <CardHeader className="bg-slate-700">
+              <CardTitle className="flex items-center text-blue-300">
                 <User className="mr-2" />
                 {request.name}
               </CardTitle>
-              <CardDescription>
+              <CardDescription className="text-slate-300">
                 {request.jobRole} at {request.company}
               </CardDescription>
             </CardHeader>
             <CardContent className="pt-4">
-              <p className="flex items-center mb-2">
+              <p className="flex items-center mb-2 text-slate-300">
                 <Briefcase className="mr-2 h-4 w-4" /> {request.company}
               </p>
-              <p className="flex items-center mb-2">
+              <p className="flex items-center mb-2 text-slate-300">
                 <Calendar className="mr-2 h-4 w-4" /> {request.duration}
               </p>
               <div className="flex items-center">
-                <Code className="mr-2 h-4 w-4" />
+                <Code className="mr-2 h-4 w-4 text-slate-300" />
                 <div className="flex flex-wrap gap-1">
                   {request.skills.map((skill, index) => (
-                    <Badge key={index} variant="secondary">
+                    <Badge
+                      key={index}
+                      variant="secondary"
+                      className="bg-blue-600 text-slate-200"
+                    >
                       {skill}
                     </Badge>
                   ))}
@@ -176,7 +180,7 @@ const MyLedger: React.FC<MyLedgerProps> = ({
             <CardFooter>
               <Button
                 onClick={() => handleCardClick(request)}
-                className="w-full"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-slate-200"
               >
                 View Details
               </Button>
@@ -186,34 +190,39 @@ const MyLedger: React.FC<MyLedgerProps> = ({
       </div>
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="sm:max-w-[425px] bg-slate-700 border-slate-700">
+        <DialogContent className="sm:max-w-[425px] bg-slate-800 text-slate-200">
           <DialogHeader>
-            <DialogTitle>
+            <DialogTitle className="text-blue-400">
               {selectedRequest?.name} - Verification Details
             </DialogTitle>
-            <DialogDescription>
+            <DialogDescription className="text-slate-300">
               Review and verify the following information:
             </DialogDescription>
           </DialogHeader>
           {selectedRequest && (
             <div className="mt-4 space-y-2">
               <p className="flex items-center">
-                <User className="mr-2 h-4 w-4" /> <strong>Job Role:</strong>{" "}
-                {selectedRequest.jobRole}
+                <User className="mr-2 h-4 w-4 text-blue-400" />{" "}
+                <strong>Job Role:</strong> {selectedRequest.jobRole}
               </p>
               <p className="flex items-center">
-                <Briefcase className="mr-2 h-4 w-4" /> <strong>Company:</strong>{" "}
-                {selectedRequest.company}
+                <Briefcase className="mr-2 h-4 w-4 text-blue-400" />{" "}
+                <strong>Company:</strong> {selectedRequest.company}
               </p>
               <p className="flex items-center">
-                <Calendar className="mr-2 h-4 w-4" /> <strong>Duration:</strong>{" "}
-                {selectedRequest.duration}
+                <Calendar className="mr-2 h-4 w-4 text-blue-400" />{" "}
+                <strong>Duration:</strong> {selectedRequest.duration}
               </p>
               <div className="flex items-center">
-                <Code className="mr-2 h-4 w-4" /> <strong>Skills:</strong>
+                <Code className="mr-2 h-4 w-4 text-blue-400" />{" "}
+                <strong>Skills:</strong>
                 <div className="flex flex-wrap gap-1 ml-2">
                   {selectedRequest.skills.map((skill, index) => (
-                    <Badge key={index} variant="secondary">
+                    <Badge
+                      key={index}
+                      variant="secondary"
+                      className="bg-blue-600 text-slate-200"
+                    >
                       {skill}
                     </Badge>
                   ))}
@@ -222,13 +231,26 @@ const MyLedger: React.FC<MyLedgerProps> = ({
             </div>
           )}
           <DialogFooter className="mt-6">
-            <Button variant="outline" onClick={() => setIsDialogOpen(false)}>
+            <Button
+              variant="outline"
+              onClick={() => setIsDialogOpen(false)}
+              className="text-slate-200 border-slate-600 hover:bg-slate-700"
+            >
               Cancel
             </Button>
-            <Button variant="destructive" onClick={handleReject}>
+            <Button
+              variant="destructive"
+              onClick={handleReject}
+              className="bg-red-600 hover:bg-red-700"
+            >
               Reject
             </Button>
-            <Button onClick={handleApprove}>Approve</Button>
+            <Button
+              onClick={handleApprove}
+              className="bg-green-600 hover:bg-green-700"
+            >
+              Approve
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
