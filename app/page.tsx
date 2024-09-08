@@ -1,5 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
 "use client";
 import React, { useState } from "react";
 import {
@@ -44,10 +42,6 @@ interface AlertState {
   message: string;
 }
 
-interface MyLedgerProps {
-  initialRequests?: VerificationRequest[];
-}
-
 const defaultRequests: VerificationRequest[] = [
   {
     id: 1,
@@ -83,11 +77,9 @@ const defaultRequests: VerificationRequest[] = [
   },
 ];
 
-const MyLedger: React.FC<MyLedgerProps> = ({
-  initialRequests = defaultRequests,
-}) => {
+const MyLedger = () => {
   const [verificationRequests] =
-    useState<VerificationRequest[]>(initialRequests);
+    useState<VerificationRequest[]>(defaultRequests);
   const [selectedRequest, setSelectedRequest] =
     useState<VerificationRequest | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -126,7 +118,7 @@ const MyLedger: React.FC<MyLedgerProps> = ({
 
       {alert && (
         <Alert
-          className="mb-6 max-w-md mx-auto text-white "
+          className="mb-6 max-w-md mx-auto text-white"
           variant={alert.type === "success" ? "default" : "destructive"}
         >
           {alert.type === "success" ? (
