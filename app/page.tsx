@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import {
-  X,
   CheckCircle,
   XCircle,
   User,
@@ -144,9 +143,9 @@ const MyLedger: React.FC<MyLedgerProps> = ({
         {verificationRequests.map((request) => (
           <Card
             key={request.id}
-            className="cursor-pointer hover:shadow-lg transition-shadow bg-slate-800 border-slate-700 text-slate-200"
+            className="cursor-pointer hover:shadow-lg transition-shadow bg-slate-800 border-slate-700 text-slate-200 rounded-lg"
           >
-            <CardHeader className="bg-slate-700">
+            <CardHeader className="bg-slate-700 rounded-t-lg">
               <CardTitle className="flex items-center text-blue-300">
                 <User className="mr-2" />
                 {request.name}
